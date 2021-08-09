@@ -12,7 +12,7 @@ from bs4 import BeautifulSoup
 from flask import Flask, render_template, redirect
 
 
-mars_data = {}
+
 app = Flask(__name__)
 
 conn = "mongodb://localhost:27017"
@@ -22,9 +22,9 @@ client = pymongo.MongoClient(conn)
 db = client.marsDB
 collection = db.marsdata
 def scrape():
+    mars_data = {}
 
 # In[2]:
-
 
     url = "https://redplanetscience.com"
 # mars_request = requests.get(url)
@@ -32,7 +32,7 @@ def scrape():
     browser = Browser('chrome', executable_path = 'C:/Users/dinhc/OneDrive/Documents/chromedriver.exe', headless=False)
     browser.visit(url) 
     html= browser.html   
-      
+    
 
 
 # In[3]:
@@ -56,6 +56,9 @@ def scrape():
     news_p = soup.find('div', class_='article_teaser_body')
     print(news_p)
 
+    mars_data['news_title'] = news_title
+    mars_data['news_p'] = news_p
+
 
 # In[6]:
 
@@ -65,7 +68,6 @@ def scrape():
 
 
 # In[7]:
-
 
     url = 'https://spaceimages-mars.com/'
     executable_path = {'executable_path': 'C:/Users/dinhc/OneDrive/Documents/chromedriver.exe'}
@@ -108,9 +110,9 @@ def scrape():
     featured_image_url = f'https://spaceimages-mars.com/{image_path}'
     print(featured_image_url)
 
+    mars_data['featured_image_url'] = featured_image_url
 
 # In[13]:
-
 
     fact_url = 'https://galaxyfacts-mars.com/'
     execetable_path = {'executable_path': 'C:/Users/dinhc/OneDrive/Documents/chromedriver.exe'}
@@ -152,9 +154,9 @@ def scrape():
     mars_facts_html = mars_facts.to_html()
     mars_facts
 
+    mars_data['mars_facts'] = mars_facts_html
 
 # In[16]:
-
 
     hemi_url = 'https://marshemispheres.com/'
     execetable_path = {'executable_path': 'C:/Users/dinhc/OneDrive/Documents/chromedriver.exe'}
@@ -206,12 +208,12 @@ def scrape():
         })
     hemi_image_urls
 
+    mars_data['hemisphere_imgs'] = hemi_image_urls
+
 
 # In[22]:
 
 
 # jupyter nbconvert to script mission_to_mars.ipynb --output scrape_mars
 
-if __name__ == '__main__':
-    app.run(debug=True)
-    scrape()
+    return mars_data
