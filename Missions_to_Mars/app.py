@@ -8,18 +8,17 @@ conn = "mongodb://localhost:27017"
 client = pymongo.MongoClient(conn)
 
 db = client.marsDB
-collection = db.marsdata
+collection = db.mars_data
 
-
-marsdata = list(db.mars_data.find())
 
 @app.route('/')
 def index():
-    marsdata = list(db.mars_data.find())
+    marsdata = (db.mars_data.find_one())
     return render_template('index.html', marsdata=marsdata)
 
 @app.route('/scrape')
 def scrape():
+    marsdata = db.mars_data
     mars = scrape_mars.scrape()
     db.mars_data.update({}, mars, upsert=True)
     return redirect('/', code=302)

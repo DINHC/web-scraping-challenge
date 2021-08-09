@@ -23,7 +23,6 @@ db = client.marsDB
 collection = db.marsdata
 def scrape():
     mars_data = {}
-
 # In[2]:
 
     url = "https://redplanetscience.com"
