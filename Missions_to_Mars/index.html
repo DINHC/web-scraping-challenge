@@ -22,13 +22,47 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12">
-        <h4>NEWS ARTICLES</h4>
+        <h4>Mars News</h4>
         <br>
-        <h6 style="color: #c1440e">{{marsdata.news_title}}</h6>
+        <h6 style="color: #c1440e">{{ marsdata.news_title }}</h6>
         <p>{{ marsdata.news_p }} </p>
       </div>
     </div>
  
+    <div class="row">
+      <div class="col-md-8">
+        <h4>Mars Images</h4>
+        <br>
+        <img src={{ marsdata.featured_image_url }}>
+      </div>
     
-
+  
+    <div class="row">
+      <div class="col-md-4 offset-md-8">
+        <h4>Mars Facts</h4>
+        <div style="max-width: 450px; max-height: 150px; font-size: 15px; margin-bottom: 65px;">
+          {{ marsdata.mars_facts }}
+        </div>
+      </div>
+    </div>
+    
+  
+    <div class="row">
+      <div class="col-md-12" align="center">
+        <h1>Mars Hemispheres</h1>
+      </div>
+    </div>
+    {% for image in marsdata.hemi %}
+    <div class="col-md-6">
+      <div class="card text-white bg-dark" style="margin: 30px;">
+        <img class="card-img-top" src="{{ image.hemi_image_urls }}" />
+      </div>   
+    </div>
   </div>
+  {% endfor %}
+  </div>
+  </body>
+  </html>
+
+
+  
