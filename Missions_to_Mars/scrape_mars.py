@@ -9,20 +9,10 @@ import requests
 import pymongo
 from splinter import Browser
 from bs4 import BeautifulSoup
-from flask import Flask, render_template, redirect
 
 
-
-app = Flask(__name__)
-
-conn = "mongodb://localhost:27017"
-client = pymongo.MongoClient(conn)
-
-
-db = client.marsDB
-collection = db.marsdata
-def scrape():
-    mars_data = {}
+def scrape2():
+    # mars_data = {}
 # In[2]:
 
     url = "https://redplanetscience.com"
@@ -55,8 +45,8 @@ def scrape():
     news_p = soup.find('div', class_='article_teaser_body')
     print(news_p)
 
-    mars_data['news_title'] = news_title
-    mars_data['news_p'] = news_p
+    # mars_data['news_title'] = news_title
+    # mars_data['news_p'] = news_p
 
 
 # In[6]:
@@ -109,7 +99,7 @@ def scrape():
     featured_image_url = f'https://spaceimages-mars.com/{image_path}'
     print(featured_image_url)
 
-    mars_data['featured_image_url'] = featured_image_url
+    # mars_data['featured_image_url'] = featured_image_url
 
 # In[13]:
 
@@ -153,7 +143,7 @@ def scrape():
     mars_facts_html = mars_facts.to_html()
     mars_facts
 
-    mars_data['mars_facts'] = mars_facts_html
+    # mars_data['mars_facts'] = mars_facts_html
 
 # In[16]:
 
@@ -207,12 +197,19 @@ def scrape():
         })
     hemi_image_urls
 
-    mars_data['hemisphere_imgs'] = hemi_image_urls
+    # mars_data['hemisphere_imgs'] = hemi_image_urls
 
 
 # In[22]:
 
 
 # jupyter nbconvert to script mission_to_mars.ipynb --output scrape_mars
-
-    return mars_data
+    data = {
+       "news_title": news_title,
+       "news_p": news_p,
+        "featured_image_url": featured_image_url,
+        "mars_facts": mars_facts,
+        "mars_hemi":mars_hemi
+    }
+    return data
+    # return mars_data
