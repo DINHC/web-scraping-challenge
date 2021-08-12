@@ -3,6 +3,8 @@ import scrape_mars
 from flask import Flask, render_template, redirect
 from flask_pymongo import PyMongo
 # import pymongo
+# from app import app 
+
 app = Flask(__name__)
 
 # conn = "mongodb://localhost:27017"
@@ -10,8 +12,9 @@ app = Flask(__name__)
 
 # db = client.marsDB
 # collection = db.martian
-app.config["MONGO_URI"] = "mongodb://localhost:27017"
-mongo = PyMongo(app)
+mongo = PyMongo(app, uri="mongodb://localhost:27017/MARSSTUFF")
+# app.config["MONGO_URI"] = "mongodb://localhost:27017/MARSSTUFF"
+# mongo = PyMongo(app)
 
 
 @app.route('/')
