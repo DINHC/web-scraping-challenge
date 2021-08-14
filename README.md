@@ -12,4 +12,4 @@ Purpose:
       
       - Once that was done a app.py was created to reference a index.html and the scrape.py
 
-      - An index.html was then created to shape how the site is suppose to look like. With a main scarpe button in the middle with the various images placed together with the news         title/paragraph and facts
+      - An index.html was then created to shape how the site is suppose to look like. With a main scrape button at the top with the various images placed together with the news           title/paragraph and facts underneath
